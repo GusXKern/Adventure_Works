@@ -20,7 +20,7 @@ Each SQL query for this project aimed at identifying an interesting and useful b
 SELECT ROUND(SUM(salesterritory.salesytd),2) AS Total_Sales
 FROM sales.salesterritory
 ```
-![Output](Photos/#1.png)
+![Output](Photos/1.png)
 
 ### 2. Sales by Region
 ```sql
@@ -28,6 +28,7 @@ SELECT ROUND(SUM(salesterritory.salesytd),2) AS Region_Sales, salesterritory.gro
 FROM sales.salesterritory
 GROUP BY salesterritory.group
 ```
+![Output](Photos/3.png)
 
 ### 3. Sales by Year
 ```sql
@@ -38,6 +39,7 @@ FROM sales.salesorderheader
 GROUP BY year_sold
 ORDER BY Sales DESC
 ```
+![Output](Photos/4.png)
 
 ### 4. Sales By Store
 ```sql
@@ -50,7 +52,10 @@ s.salespersonid
 FROM sales.store AS s
 LEFT JOIN person.businessentitycontact AS be ON
 s.businessentityid = be.businessentityid
+```
+![Output](Photos/5.png)
 
+```sql
 -- Step 2: Join to match CustomerID for each PersonID
 WITH id_table AS
 (SELECT
@@ -68,8 +73,10 @@ cid.customerid
 FROM id_table
 LEFT JOIN sales.customer AS cid ON
 id_table.personID = cid.personID
+```
+![Output](Photos/6.png)
 
-
+```sql
 --Step 3: Join Sales Table using CustomerID to Find Sales by Store 
 WITH sales_by_store AS 
 (
@@ -100,18 +107,21 @@ sales_by_store.customerID = salesorderheader.customerID
 GROUP BY sales_by_store.name
 ORDER BY tot_store_sales DESC
 ```
+![Output](Photos/7.png)
 
 ### 5. Total Order Quantity
 ```sql
 SELECT COUNT(DISTINCT salesorderdetail.salesorderdetailid) AS Total_Orders
 FROM sales.salesorderdetail
 ```
+![Output](Photos/9.png)
 
 ### 6. Total Number of Products
 ```sql
 SELECT COUNT(DISTINCT product.productid) AS tot_products
 FROM production.product
 ```
+![Output](Photos/10.png)
 
 ### 7. Count of Products and Average Profit by Category
 ```sql
@@ -129,6 +139,7 @@ sub_cat.productcategoryID = pro_cat.productcategoryID
 GROUP BY pro_cat.productcategoryID
 ORDER BY avg_profit DESC, pro_cat_count DESC
 ```
+![Output](Photos/11.png)
 
 ### 8. Count of Products and Average Profit by Subcategory 
 ```sql
@@ -146,6 +157,7 @@ sub_cat.productcategoryID = pro_cat.productcategoryID
 GROUP BY sub_cat.productsubcategoryID
 ORDER BY avg_profit DESC, sub_cat_count DESC
 ```
+![Output](Photos/12.png)
 
 # What I Learned
 
@@ -157,4 +169,4 @@ From working on this project, I've learned many important basic and advanced SQL
 
 
 ### Closing Thoughts
-This project only touches the surface of all the insights that could be mined from the AdventureWorks database. I learned so much even in figuring out how to use PSQL and diagnose error messages I was recieving when trying to load the database into PostgreSql. This project has given me the confidence to work on future projects using databases with dozens of tables.
+This project only touches the surface of all the insights that could be mined from the AdventureWorks database. I learned so much even just figuring out how to use PSQL and diagnose error messages I was recieving when trying to load the database into PostgreSql. This project has given me the confidence to work on future projects using databases with dozens of tables.
