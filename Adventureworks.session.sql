@@ -1,9 +1,9 @@
 --Total Sales Amount
-SELECT SUM(salesterritory.salesytd)
+SELECT ROUND(SUM(salesterritory.salesytd),2) AS Total_Sales
 FROM sales.salesterritory
 
 --Sales by Region
-SELECT SUM(salesterritory.salesytd), salesterritory.group
+SELECT ROUND(SUM(salesterritory.salesytd),2) AS Region_Sales, salesterritory.group
 FROM sales.salesterritory
 GROUP BY salesterritory.group
 
@@ -81,7 +81,7 @@ SELECT COUNT(DISTINCT salesorderdetail.salesorderdetailid) AS Total_Orders
 FROM sales.salesorderdetail
 
 --Total Number of Products
-SELECT COUNT(DISTINCT product.productid)
+SELECT COUNT(DISTINCT product.productid) AS tot_products
 FROM production.product
 
 

@@ -1,7 +1,7 @@
 # Background
 AdventureWorks is a large sample database provided by Microsoft for use in SQL Server. As a user of PostgreSql, I wanted to see if I could import it into PostgreSql and then write queries to analyse the data from a business perspective.
 
-In order to import the data, I relied on this work done by [NorfolkDataSci](https://github.com/NorfolkDataSci/adventure-works-postgres), who were themselves adding to work done originally by [lorint](https://github.com/lorint/AdventureWorks-for-Postgres).
+In order to import the data, I relied on this work done by [NorfolkDataSci](https://github.com/NorfolkDataSci/adventure-works-postgres), who were themselves adding to work done originally by [lorint](https://github.com/lorint/AdventureWorks-for-Postgres). Using the updated CSV files, I was able to use SQL Shell (PSQL) to load the install.sql file (after making adjustments to the filepaths) to load all of AdventureWorks onto my PostgreSql server.
 
 # Tools I Used
 
@@ -17,13 +17,14 @@ Each SQL query for this project aimed at identifying an interesting and useful b
 
 ### 1. Total Sales Amount
 ```sql
-SELECT SUM(salesterritory.salesytd)
+SELECT ROUND(SUM(salesterritory.salesytd),2) AS Total_Sales
 FROM sales.salesterritory
 ```
+![Output](Photos/#1.png)
 
 ### 2. Sales by Region
 ```sql
-SELECT SUM(salesterritory.salesytd), salesterritory.group
+SELECT ROUND(SUM(salesterritory.salesytd),2) AS Region_Sales, salesterritory.group
 FROM sales.salesterritory
 GROUP BY salesterritory.group
 ```
@@ -108,7 +109,7 @@ FROM sales.salesorderdetail
 
 ### 6. Total Number of Products
 ```sql
-SELECT COUNT(DISTINCT product.productid)
+SELECT COUNT(DISTINCT product.productid) AS tot_products
 FROM production.product
 ```
 
@@ -145,3 +146,15 @@ sub_cat.productcategoryID = pro_cat.productcategoryID
 GROUP BY sub_cat.productsubcategoryID
 ORDER BY avg_profit DESC, sub_cat_count DESC
 ```
+
+# What I Learned
+
+From working on this project, I've learned many important basic and advanced SQL skills:
+
+- **🧩 Working With Large Databases:** Worked with queries where I needed to merge more than two tables, using WITH clauses to make temporary results sets. This also improved my understanding of large relational databases. Deciding which tables to use in my joins to efficiently get all of the information I needed was a fun and rewarding challenge to tackle. 
+- **📊 Data Aggregation:** Used GROUP BY and aggregate functions like COUNT() and AVG() to find key insights in the data.
+- **💡 Analytical Wizardry:** Leveled up my real-world puzzle-solving skills, turning questions into actionable, insightful SQL queries.
+
+
+### Closing Thoughts
+This project only touches the surface of all the insights that could be mined from the AdventureWorks database. I learned so much even in figuring out how to use PSQL and diagnose error messages I was recieving when trying to load the database into PostgreSql. This project has given me the confidence to work on future projects using databases with dozens of tables.
