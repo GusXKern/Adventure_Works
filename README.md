@@ -13,7 +13,7 @@ In order to import the data, I relied on this work done by [NorfolkDataSci](http
 Check out the SQL querys I used here: [AdventureWorks Queries](Adventureworks.session.sql)
 
 # The Analysis
-Each SQL query for this project aimed at identifying an interesting and useful buisiness-related observation about the large dataset:
+Each SQL query for this project aimed at identifying an interesting and useful buisiness-related observation about the large dataset. Some of the questions to be answered are taken from the work of [Zaynab Awofeso](https://medium.com/learning-sql/eadventureworks-database-427e59144bc0):
 
 ### 1. Total Sales Amount
 ```sql
